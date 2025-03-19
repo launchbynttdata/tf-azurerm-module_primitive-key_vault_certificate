@@ -13,7 +13,6 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_external"></a> [external](#provider\_external) | 2.3.4 |
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.117.1 |
 
 ## Modules
@@ -31,7 +30,6 @@
 | Name | Type |
 |------|------|
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
-| [external_external.certificate](https://registry.terraform.io/providers/hashicorp/external/latest/docs/data-sources/external) | data source |
 
 ## Inputs
 
@@ -43,6 +41,11 @@
 | <a name="input_environment_number"></a> [environment\_number](#input\_environment\_number) | The environment count for the respective environment. Defaults to 000. Increments in value of 1 | `string` | `"000"` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS Region in which the infra needs to be provisioned | `string` | `"eastus"` | no |
 | <a name="input_resource_names_map"></a> [resource\_names\_map](#input\_resource\_names\_map) | A map of key to resource\_name that will be used by tf-launch-module\_library-resource\_name to generate resource names | <pre>map(object(<br>    {<br>      name       = string<br>      max_length = optional(number, 60)<br>    }<br>  ))</pre> | <pre>{<br>  "kv": {<br>    "max_length": 24,<br>    "name": "kv"<br>  },<br>  "msi": {<br>    "max_length": 60,<br>    "name": "msi"<br>  },<br>  "rg": {<br>    "max_length": 60,<br>    "name": "rg"<br>  }<br>}</pre> | no |
+| <a name="input_issuer_name"></a> [issuer\_name](#input\_issuer\_name) | name of the issuer to generate the certificate with. Use 'Self' for self-signed certificate | `string` | `"Self"` | no |
+| <a name="input_key_properties"></a> [key\_properties](#input\_key\_properties) | options for the private key of the certificate | <pre>object({<br>    exportable = bool<br>    key_type   = string<br>    reuse_key  = bool<br>    curve      = optional(string)<br>    key_size   = optional(number)<br>  })</pre> | <pre>{<br>  "exportable": true,<br>  "key_size": 2048,<br>  "key_type": "RSA",<br>  "reuse_key": false<br>}</pre> | no |
+| <a name="input_lifetime_action"></a> [lifetime\_action](#input\_lifetime\_action) | action to take when the certificate is about to expire | <pre>object({<br>    action = object({<br>      action_type = string<br>    })<br>    trigger = object({<br>      days_before_expiry  = optional(number)<br>      lifetime_percentage = optional(number)<br>    })<br>  })</pre> | `null` | no |
+| <a name="input_secret_properties"></a> [secret\_properties](#input\_secret\_properties) | properties of the underlying key vault secret | <pre>object({<br>    content_type = string<br>  })</pre> | <pre>{<br>  "content_type": "application/x-pkcs12"<br>}</pre> | no |
+| <a name="input_x509_certificate_properties"></a> [x509\_certificate\_properties](#input\_x509\_certificate\_properties) | properties of the x509 certificate | <pre>object({<br>    key_usage          = list(string)<br>    extended_key_usage = optional(list(string))<br>    subject            = string<br>    validity_in_months = number<br>    subject_alternative_names = optional(object({<br>      dns_names = optional(list(string))<br>      emails    = optional(list(string))<br>      upns      = optional(list(string))<br>    }))<br>  })</pre> | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Custom tags for the Key vault | `map(string)` | `{}` | no |
 | <a name="input_certificate_name"></a> [certificate\_name](#input\_certificate\_name) | Name of the certificate to import | `string` | n/a | yes |
 

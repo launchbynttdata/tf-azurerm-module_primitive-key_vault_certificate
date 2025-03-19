@@ -1,6 +1,6 @@
 module github.com/launchbynttdata/tf-azurerm-module_primitive-key_vault_certificate
 
-go 1.21
+go 1.22
 
 require (
 	github.com/gruntwork-io/terratest v0.48.0

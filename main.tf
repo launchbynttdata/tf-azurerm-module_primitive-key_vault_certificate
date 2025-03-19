@@ -42,7 +42,7 @@ resource "azurerm_key_vault_certificate" "certificate" {
         for_each = var.lifetime_action != null ? [var.lifetime_action] : []
         content {
           action {
-            action_type = var.lifetime_action.action_type
+            action_type = var.lifetime_action.action.action_type
           }
           trigger {
             days_before_expiry  = var.lifetime_action.trigger.days_before_expiry

@@ -10,10 +10,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-data "external" "certificate" {
-  program = ["bash", "create_certificate.sh"]
-}
-
 data "azurerm_client_config" "current" {}
 
 module "resource_names" {
@@ -39,6 +35,7 @@ module "resource_group" {
   location = var.region
 
   tags = merge(var.tags, { resource_name = module.resource_names["rg"].standard })
+
 }
 
 module "certificate_deployment_role_assignment" {
@@ -51,7 +48,6 @@ module "certificate_deployment_role_assignment" {
 
   depends_on = [module.resource_group]
 }
-
 
 module "key_vault" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/key_vault/azurerm"
@@ -76,10 +72,13 @@ module "key_vault_certificate" {
   name         = var.certificate_name
   key_vault_id = module.key_vault.key_vault_id
 
-  method = "Import"
-  certificate = {
-    contents = data.external.certificate.result.pfx
-  }
+  method = "Generate"
+
+  issuer_name                 = var.issuer_name
+  key_properties              = var.key_properties
+  lifetime_action             = var.lifetime_action
+  secret_properties           = var.secret_properties
+  x509_certificate_properties = var.x509_certificate_properties
 
   tags = var.tags
 
