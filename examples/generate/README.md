@@ -12,10 +12,10 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_certificate_deployment_role_assignment"></a> [certificate\_deployment\_role\_assignment](#module\_certificate\_deployment\_role\_assignment) | terraform.registry.launch.nttdata.com/module_primitive/role_assignment/azurerm | ~> 2.4 |
+| <a name="module_certificate_deployment_role_assignment"></a> [certificate\_deployment\_role\_assignment](#module\_certificate\_deployment\_role\_assignment) | terraform.registry.launch.nttdata.com/module_primitive/role_assignment/azurerm | ~> 1.3 |
 | <a name="module_key_vault"></a> [key\_vault](#module\_key\_vault) | terraform.registry.launch.nttdata.com/module_primitive/key_vault/azurerm | ~> 2.1 |
 | <a name="module_key_vault_certificate"></a> [key\_vault\_certificate](#module\_key\_vault\_certificate) | ../.. | n/a |
-| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm | ~> 2.4 |
+| <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm | ~> 1.0 |
 | <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | terraform.registry.launch.nttdata.com/module_library/resource_name/launch | ~> 2.0 |
 
 ## Resources
