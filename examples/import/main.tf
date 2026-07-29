@@ -43,7 +43,7 @@ module "resource_group" {
 
 module "certificate_deployment_role_assignment" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/role_assignment/azurerm"
-  version = "~> 1.0"
+  version = "~> 1.3"
 
   principal_id         = data.azurerm_client_config.current.object_id
   role_definition_name = "Key Vault Administrator"
