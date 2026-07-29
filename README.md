@@ -103,19 +103,13 @@ If `make check` target is successful, developer is good to commit the code to pr
 - runs `conftests`. `conftests` make sure `policy` checks are successful.
 - runs `terratest`. This is integration test suit.
 - runs `opa` tests
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~>3.117 |
-
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.117.1 |
 
 ## Modules
 
@@ -131,28 +125,28 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_name"></a> [name](#input\_name) | The name of the certificate | `string` | n/a | yes |
-| <a name="input_method"></a> [method](#input\_method) | Method of certificate creation. Possible values are 'Import' and 'Generate' | `string` | n/a | yes |
-| <a name="input_certificate"></a> [certificate](#input\_certificate) | base64-encoded pfx bundle containing the certificate, with optional password | <pre>object({<br>    contents = string<br>    password = optional(string)<br>  })</pre> | `null` | no |
+| <a name="input_certificate"></a> [certificate](#input\_certificate) | base64-encoded pfx bundle containing the certificate, with optional password | <pre>object({<br/>    contents = string<br/>    password = optional(string)<br/>  })</pre> | `null` | no |
 | <a name="input_issuer_name"></a> [issuer\_name](#input\_issuer\_name) | name of the issuer to generate the certificate with. Use 'Self' for self-signed certificate | `string` | `"Self"` | no |
-| <a name="input_key_properties"></a> [key\_properties](#input\_key\_properties) | options for the private key of the certificate | <pre>object({<br>    exportable = bool<br>    key_type   = string<br>    reuse_key  = bool<br>    curve      = optional(string)<br>    key_size   = optional(number)<br>  })</pre> | <pre>{<br>  "exportable": true,<br>  "key_size": 2048,<br>  "key_type": "RSA",<br>  "reuse_key": false<br>}</pre> | no |
-| <a name="input_lifetime_action"></a> [lifetime\_action](#input\_lifetime\_action) | action to take when the certificate is about to expire | <pre>object({<br>    action = object({<br>      action_type = string<br>    })<br>    trigger = object({<br>      days_before_expiry  = optional(number)<br>      lifetime_percentage = optional(number)<br>    })<br>  })</pre> | `null` | no |
-| <a name="input_secret_properties"></a> [secret\_properties](#input\_secret\_properties) | properties of the underlying key vault secret | <pre>object({<br>    content_type = string<br>  })</pre> | <pre>{<br>  "content_type": "application/x-pkcs12"<br>}</pre> | no |
-| <a name="input_x509_certificate_properties"></a> [x509\_certificate\_properties](#input\_x509\_certificate\_properties) | properties of the x509 certificate | <pre>object({<br>    key_usage          = list(string)<br>    extended_key_usage = optional(list(string))<br>    subject            = string<br>    validity_in_months = number<br>    subject_alternative_names = optional(object({<br>      dns_names = optional(list(string))<br>      emails    = optional(list(string))<br>      upns      = optional(list(string))<br>    }))<br>  })</pre> | `null` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | The tags for the certificate | `map(string)` | `{}` | no |
+| <a name="input_key_properties"></a> [key\_properties](#input\_key\_properties) | options for the private key of the certificate | <pre>object({<br/>    exportable = bool<br/>    key_type   = string<br/>    reuse_key  = bool<br/>    curve      = optional(string)<br/>    key_size   = optional(number)<br/>  })</pre> | <pre>{<br/>  "exportable": true,<br/>  "key_size": 2048,<br/>  "key_type": "RSA",<br/>  "reuse_key": false<br/>}</pre> | no |
 | <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id) | Id of the key vault to which certificates need to be added. | `string` | n/a | yes |
+| <a name="input_lifetime_action"></a> [lifetime\_action](#input\_lifetime\_action) | action to take when the certificate is about to expire | <pre>object({<br/>    action = object({<br/>      action_type = string<br/>    })<br/>    trigger = object({<br/>      days_before_expiry  = optional(number)<br/>      lifetime_percentage = optional(number)<br/>    })<br/>  })</pre> | `null` | no |
+| <a name="input_method"></a> [method](#input\_method) | Method of certificate creation. Possible values are 'Import' and 'Generate' | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the certificate | `string` | n/a | yes |
+| <a name="input_secret_properties"></a> [secret\_properties](#input\_secret\_properties) | properties of the underlying key vault secret | <pre>object({<br/>    content_type = string<br/>  })</pre> | <pre>{<br/>  "content_type": "application/x-pkcs12"<br/>}</pre> | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | The tags for the certificate | `map(string)` | `{}` | no |
+| <a name="input_x509_certificate_properties"></a> [x509\_certificate\_properties](#input\_x509\_certificate\_properties) | properties of the x509 certificate | <pre>object({<br/>    key_usage          = list(string)<br/>    extended_key_usage = optional(list(string))<br/>    subject            = string<br/>    validity_in_months = number<br/>    subject_alternative_names = optional(object({<br/>      dns_names = optional(list(string))<br/>      emails    = optional(list(string))<br/>      upns      = optional(list(string))<br/>    }))<br/>  })</pre> | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_name"></a> [name](#output\_name) | The name of the certificate |
-| <a name="output_thumbprint"></a> [thumbprint](#output\_thumbprint) | The thumbprint of the certificate |
-| <a name="output_version"></a> [version](#output\_version) | The current version of the certificate |
 | <a name="output_id"></a> [id](#output\_id) | The ID of the Key Vault Certificate |
-| <a name="output_versionless_id"></a> [versionless\_id](#output\_versionless\_id) | The ID of the Key Vault Certificate without the current version |
-| <a name="output_secret_id"></a> [secret\_id](#output\_secret\_id) | id of the underlying secret with the current version |
-| <a name="output_versionless_secret_id"></a> [versionless\_secret\_id](#output\_versionless\_secret\_id) | id of the underlying secret without the current version |
+| <a name="output_name"></a> [name](#output\_name) | The name of the certificate |
 | <a name="output_resource_manager_id"></a> [resource\_manager\_id](#output\_resource\_manager\_id) | The Resource Manager ID of the Key Vault Certificate |
 | <a name="output_resource_manager_versionless_id"></a> [resource\_manager\_versionless\_id](#output\_resource\_manager\_versionless\_id) | The Resource Manager ID of the Key Vault Certificate without the current version |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+| <a name="output_secret_id"></a> [secret\_id](#output\_secret\_id) | id of the underlying secret with the current version |
+| <a name="output_thumbprint"></a> [thumbprint](#output\_thumbprint) | The thumbprint of the certificate |
+| <a name="output_version"></a> [version](#output\_version) | The current version of the certificate |
+| <a name="output_versionless_id"></a> [versionless\_id](#output\_versionless\_id) | The ID of the Key Vault Certificate without the current version |
+| <a name="output_versionless_secret_id"></a> [versionless\_secret\_id](#output\_versionless\_secret\_id) | id of the underlying secret without the current version |
+<!-- END_TF_DOCS -->
