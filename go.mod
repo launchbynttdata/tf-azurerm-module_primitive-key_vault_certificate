@@ -1,6 +1,6 @@
 module github.com/launchbynttdata/tf-azurerm-module_primitive-key_vault_certificate
 
-go 1.22
+go 1.23.0
 
 require (
 	github.com/gruntwork-io/terratest v0.48.0
@@ -119,7 +119,7 @@ require (
 	golang.org/x/crypto v0.29.0 // indirect
 	golang.org/x/mod v0.18.0 // indirect
 	golang.org/x/net v0.31.0 // indirect
-	golang.org/x/oauth2 v0.24.0 // indirect
+	golang.org/x/oauth2 v0.27.0 // indirect
 	golang.org/x/sync v0.9.0 // indirect
 	golang.org/x/sys v0.27.0 // indirect
 	golang.org/x/term v0.26.0 // indirect
