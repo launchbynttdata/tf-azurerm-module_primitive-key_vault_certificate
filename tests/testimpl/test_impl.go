@@ -13,6 +13,7 @@
 package common
 
 import (
+	"context"
 	"os"
 	"testing"
 
@@ -28,17 +29,17 @@ func TestComposableKeyVaultSecret(t *testing.T, ctx types.TestContext) {
 		t.Fatal("ARM_SUBSCRIPTION_ID environment variable is not set")
 	}
 
-	rgName := terraform.Output(t, ctx.TerratestTerraformOptions(), "resource_group_name")
-	keyVaultName := terraform.Output(t, ctx.TerratestTerraformOptions(), "key_vault_name")
-	certificateName := terraform.Output(t, ctx.TerratestTerraformOptions(), "certificate_name")
+	rgName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "resource_group_name")
+	keyVaultName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "key_vault_name")
+	certificateName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "certificate_name")
 
 	t.Run("KeyVaultExists", func(t *testing.T) {
-		keyVault := azure.GetKeyVault(t, rgName, keyVaultName, subscriptionId)
+		keyVault := azure.GetKeyVaultContext(t, t.Context(), rgName, keyVaultName, subscriptionId)
 		assert.Equal(t, keyVaultName, *keyVault.Name, "Expected Key Vault name to be %s, but got %s", keyVaultName, *keyVault.Name)
 	})
 
 	t.Run("SecretExists", func(t *testing.T) {
-		secretExists := azure.KeyVaultCertificateExists(t, keyVaultName, certificateName)
+		secretExists := azure.KeyVaultCertificateExistsContext(t, t.Context(), keyVaultName, certificateName)
 		assert.True(t, secretExists, "Expected secret %s to exist in Key Vault %s, but it does not", certificateName, keyVaultName)
 	})
 }
