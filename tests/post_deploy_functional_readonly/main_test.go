@@ -25,7 +25,7 @@ const (
 	infraTFVarFileNameDefault        = "test.tfvars"
 )
 
-func TestKeyVaultSecretModule(t *testing.T) {
+func TestKeyVaultCertificateModule(t *testing.T) {
 
 	ctx := types.CreateTestContextBuilder().
 		SetTestConfig(&testimpl.ThisTFModuleConfig{}).
@@ -33,5 +33,5 @@ func TestKeyVaultSecretModule(t *testing.T) {
 		SetTestConfigFileName(infraTFVarFileNameDefault).
 		Build()
 
-	lib.RunNonDestructiveTest(t, *ctx, testimpl.TestComposableKeyVaultSecret)
+	lib.RunNonDestructiveTest(t, *ctx, testimpl.TestComposableKeyVaultCertificate)
 }

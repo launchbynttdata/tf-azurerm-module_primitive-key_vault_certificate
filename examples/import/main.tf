@@ -55,7 +55,7 @@ module "certificate_deployment_role_assignment" {
 
 module "key_vault" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/key_vault/azurerm"
-  version = "~> 3.1"
+  version = "~> 4.0"
 
   key_vault_name = module.resource_names["kv"].minimal_random_suffix
   resource_group = {
